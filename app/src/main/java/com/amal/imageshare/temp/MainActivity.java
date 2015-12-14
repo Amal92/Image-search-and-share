@@ -1,4 +1,4 @@
-package com.amal.imageshare;
+package com.amal.imageshare.temp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.amal.imageshare.Main3Activity;
+import com.amal.imageshare.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;

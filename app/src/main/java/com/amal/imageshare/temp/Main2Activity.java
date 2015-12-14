@@ -1,4 +1,4 @@
-package com.amal.imageshare;
+package com.amal.imageshare.temp;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.amal.imageshare.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

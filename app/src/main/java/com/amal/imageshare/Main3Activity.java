@@ -39,8 +39,6 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 public class Main3Activity extends AppCompatActivity implements AsyncTaskCompleteListener {
 
     StaggeredGridAdapter staggeredGridAdapter;
-    private GridAdapter gridAdapter;
-    private GridView galleryView;
     private RecyclerView recyclerView;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private ArrayList<SearchEngineResults> searchEngineResultsArrayList;
