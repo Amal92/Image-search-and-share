@@ -13,16 +13,17 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-import android.widget.GridView;
 
-import com.amal.imageshare.Adapters.GridAdapter;
 import com.amal.imageshare.Adapters.StaggeredGridAdapter;
 import com.amal.imageshare.Interfaces.AsyncTaskCompleteListener;
 import com.amal.imageshare.Models.SearchEngineResults;
 import com.amal.imageshare.Networking.HttpRequester;
 import com.amal.imageshare.Utils.Const;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.quinny898.library.persistentsearch.SearchBox;
 import com.quinny898.library.persistentsearch.SearchResult;
+import com.splunk.mint.Mint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,8 +73,11 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Mint.initAndStartSession(Main3Activity.this, "3c750e3e");
         progressBar = (SmoothProgressBar) findViewById(R.id.progress_bar);
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         search = (SearchBox) findViewById(R.id.searchbox);
         search.enableVoiceRecognition(this);
@@ -133,10 +137,10 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
                     int totalItemCount = staggeredGridLayoutManager.getItemCount();
                     int[] firstVisibleItemPositions = new int[2];
                     int pastVisiblesItems = staggeredGridLayoutManager.findFirstVisibleItemPositions(firstVisibleItemPositions)[0];
-                    if (!next.isEmpty()&& loading) {
+                    if (!next.isEmpty() && loading) {
                         if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
                             loadMoreData(next);
-                            loading=false;
+                            loading = false;
                         }
                     }
                 }
@@ -225,7 +229,7 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     next = jsonObject.optString(Const.Params.NEXT);
-                    loading=true;
+                    loading = true;
                     JSONArray resultsArray = jsonObject.getJSONArray(Const.Params.RESULTS);
                     for (int i = 0; i < resultsArray.length(); i++) {
                         SearchEngineResults searchEngineResult = new SearchEngineResults();
