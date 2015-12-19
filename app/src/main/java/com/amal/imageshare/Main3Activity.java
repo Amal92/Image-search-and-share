@@ -19,6 +19,10 @@ import com.amal.imageshare.Interfaces.AsyncTaskCompleteListener;
 import com.amal.imageshare.Models.SearchEngineResults;
 import com.amal.imageshare.Networking.HttpRequester;
 import com.amal.imageshare.Utils.Const;
+import com.amal.imageshare.Utils.PreferenceHelper;
+import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.quinny898.library.persistentsearch.SearchBox;
@@ -37,7 +41,7 @@ import java.util.HashMap;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
-public class Main3Activity extends AppCompatActivity implements AsyncTaskCompleteListener {
+public class Main3Activity extends AppCompatActivity implements AsyncTaskCompleteListener, OnShowcaseEventListener {
 
     StaggeredGridAdapter staggeredGridAdapter;
     private RecyclerView recyclerView;
@@ -47,6 +51,7 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
     private SmoothProgressBar progressBar;
     private String next;
     private boolean loading = true;
+    private AdView mAdView;
 
     public static void cleanCache(Context context) {
         try {
@@ -75,9 +80,8 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
         }
         Mint.initAndStartSession(Main3Activity.this, "3c750e3e");
         progressBar = (SmoothProgressBar) findViewById(R.id.progress_bar);
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
+        mAdView = (AdView) findViewById(R.id.adView);
 
         search = (SearchBox) findViewById(R.id.searchbox);
         search.enableVoiceRecognition(this);
@@ -147,6 +151,20 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
             }
         });
 
+        if (new PreferenceHelper(this).getFirstuse()) {
+            new ShowcaseView.Builder(this)
+                    .withMaterialShowcase()
+                    .setTarget(new ViewTarget(R.id.searchbox, this))
+                    .setContentTitle("Search for images from web")
+                    .setContentText("Tap the search bar to start searching.")
+                    .setStyle(R.style.CustomShowcaseTheme2)
+                    .hideOnTouchOutside()
+                    .setShowcaseEventListener(this)
+                    .replaceEndButton(R.layout.view_custom_button)
+                    .build();
+        } else {
+            load_ad();
+        }
     }
 
     private void encodeSearchString(String searchTerm) {
@@ -263,4 +281,24 @@ public class Main3Activity extends AppCompatActivity implements AsyncTaskComplet
     }
 
 
+    @Override
+    public void onShowcaseViewHide(ShowcaseView showcaseView) {
+        load_ad();
+        new PreferenceHelper(this).putFirstuse(false);
+    }
+
+    @Override
+    public void onShowcaseViewDidHide(ShowcaseView showcaseView) {
+
+    }
+
+    @Override
+    public void onShowcaseViewShow(ShowcaseView showcaseView) {
+
+    }
+
+    public void load_ad() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
 }

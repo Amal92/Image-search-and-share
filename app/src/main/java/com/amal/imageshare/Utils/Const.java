@@ -9,6 +9,7 @@ public class Const {
     //General
     public static final String URL = "url";
     public static final String CACHED_DIRECTORY_NAME = "shared_images_from_this_app";
+    public static final String PREF_NAME = "ImageSearchNShare_PREF";
     //for GET/POST method
     public static int GET = 0;
     public static int POST = 1;
