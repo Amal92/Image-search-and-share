@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">ImageSearchNShare</string>
+    <string name="app_name">Image reply</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_main3">ImageSearchNShare</string>
-    <string name="searchormic">Search or tap mic icon</string>
+    <string name="title_activity_main3">Image Reply</string>
+    <string name="searchormic">Search, or tap mic icon</string>
+    <string name="showcase_title">Welcome Image Reply</string>
+    <string name="showcase_content_1">- Now you can easily reply to comments on Whatsapp, Messenger, hike..etc with images from web.</string>
+    <string name="showcase_content_2">- Now you don\'t have to download any funny image to your device to reply to a message and eat up all that device memory.</string>
+    <string name="showcase_content_3">- Search and simply tap on the image from search result to share it easily.</string>
     <string name="banner_ad_unit_id">ca-app-pub-2458218965452537/4185998202</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
