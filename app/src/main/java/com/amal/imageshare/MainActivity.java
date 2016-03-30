@@ -180,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                     .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             search.populateEditText(matches.get(0));
             // encodeSearchString(matches.get(0));
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
