@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private viewPagerAdapter viewAdapter;
     private PagerSlidingTabStrip tabs;
-
-    private AdView mAdView;
     private ShowcaseView showcaseView;
 
     public static void cleanCache(Context context) {
@@ -65,9 +63,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Mint.initAndStartSession(MainActivity.this, "3c750e3e");
-
-
-        mAdView = (AdView) findViewById(R.id.adView);
 
         viewPager = (ViewPager) findViewById(R.id.my_viewpager);
         viewAdapter = new viewPagerAdapter(getSupportFragmentManager());
@@ -208,8 +203,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void load_ad() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
 }
